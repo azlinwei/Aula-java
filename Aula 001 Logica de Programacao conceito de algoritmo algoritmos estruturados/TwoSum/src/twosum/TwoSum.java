@@ -10,26 +10,30 @@ package twosum;
  * @author azlin
  */
 public class TwoSum {
-    int[] ListNum = {5, 6, 8, 9};
-    int AlvoNum = 14;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+    int[] ListNum = {10, 6, 8, 9};
+    int AlvoNum = 21;
 
-    TwoSum ValNum = new TwoSum();
+    //TwoSum ValNum = new TwoSum();
 
-        if(ValNum.ListNum[0] + ValNum.ListNum[1] == ValNum.AlvoNum){
-            System.out.print(ValNum.ListNum[0]+" + "+ValNum.ListNum[1]);
-            System.out.println(" = "+ValNum.AlvoNum);
+        if(ListNum[0] + ListNum[1] == AlvoNum){
+            System.out.print(ListNum[0]+" + "+ListNum[1]);
+            System.out.println(" = "+AlvoNum);
         }
-        if(ValNum.ListNum[0] + ValNum.ListNum[2] == ValNum.AlvoNum){
-            System.out.print(ValNum.ListNum[0]+" + "+ValNum.ListNum[2]);
-            System.out.println(" = "+ValNum.AlvoNum);
+        if(ListNum[0] + ListNum[2] == AlvoNum){
+            System.out.print(ListNum[0]+" + "+ListNum[2]);
+            System.out.println(" = "+AlvoNum);
         }
-        if(ValNum.ListNum[0] + ValNum.ListNum[3] == ValNum.AlvoNum){
-            System.out.print(ValNum.ListNum[0]+" + "+ValNum.ListNum[3]);
-            System.out.println(" = "+ValNum.AlvoNum);
+        if(ListNum[0] + ListNum[3] == AlvoNum){
+            System.out.print(ListNum[0]+" + "+ListNum[3]);
+            System.out.println(" = "+AlvoNum);
+        }
+        else{
+            System.out.println(" Erro....");
         }
         
     }
