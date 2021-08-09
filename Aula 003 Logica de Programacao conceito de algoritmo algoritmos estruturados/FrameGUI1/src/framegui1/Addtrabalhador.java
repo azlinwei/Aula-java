@@ -244,7 +244,7 @@ public class Addtrabalhador extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "cOMPLETE INFORMACOES, POR FAVOR");
+            JOptionPane.showMessageDialog(null, "COMPLETE INFORMACOES, POR FAVOR");
         }
         else{
             String name = jTextField1.getText().trim();

@@ -99,6 +99,12 @@ public class AddNew extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Nome da vaga");
 
+        NomeDaVaga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NomeDaVagaActionPerformed(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Salary");
 
@@ -181,6 +187,10 @@ public class AddNew extends javax.swing.JFrame {
     private void SalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SalarioActionPerformed
+
+    private void NomeDaVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeDaVagaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NomeDaVagaActionPerformed
 
     /**
      * @param args the command line arguments
