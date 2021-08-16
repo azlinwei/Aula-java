@@ -3,25 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package insertteste;
-import java.util.Scanner;
+package teste;
 
 /**
  *
  * @author azlin
  */
-public class InsertTeste {
+public class Teste {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        double a = 0;
-        Scanner input = new Scanner(System.in);
-	System.out.println("Informe dados: ");
-	a = input.nextDouble();
-	System.out.println("Informação inserida é " + a);
-
+        int[] a= {1, 2, 4, 6, 8, 10};
+        int alvo = 5;
+        if (a[0] + a[2] ==alvo){
+            System.out.print("achou resultado");
+        }
     }
     
 }
