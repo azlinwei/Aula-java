@@ -428,7 +428,7 @@ public class Calc extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        int length = jTextField1.getText().length();
+        /*int length = jTextField1.getText().length();
         int number = jTextField1.getText().length() - 1;
         String store;
         
@@ -437,7 +437,11 @@ public class Calc extends javax.swing.JFrame {
            back.deleteCharAt(number);
            store = back.toString();
            jTextField1.setText(store);
-        }
+        }*/
+        String num = jTextField1.getText().trim();
+        String nova = num.substring(0,num.length()-1);
+        jTextField1.setText(nova);
+        
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
