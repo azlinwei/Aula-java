@@ -5,21 +5,50 @@
  */
 package authentic4;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
 
 /**
  *
  * @author azlin
  */
-public class NewJFrame extends javax.swing.JFrame {
-
+public class verify extends javax.swing.JFrame {
+    ArrayList<Dados> da;
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public verify() {
         initComponents();
+        da = new ArrayList<Dados>();
+        cadArraylist();
     }
-
+ public void cadArraylist()
+    {
+        try{
+            FileInputStream file = new FileInputStream("Dados.dat");
+            ObjectInputStream inputFile = new ObjectInputStream(file);
+            boolean endOfFile = false;
+            while(!endOfFile)
+            {
+                try{
+                    da.add((Dados) inputFile.readObject());
+                
+                }catch(EOFException e){
+                 endOfFile = true;
+                }catch(Exception f){
+                JOptionPane.showMessageDialog(null, f.getMessage());
+                }
+            
+            }
+            inputFile.close();
+        }catch(IOException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+    }
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,7 +65,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Verify");
 
         jLabel1.setText("Nome:");
 
@@ -93,67 +123,37 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Dados date = new Dados();
-        //JOptionPane.showMessageDialog(null, date.getAcesso1());
+        
         if(jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(null, "Acesso negado,COMPLETE INFORMACOES, POR FAVOR","Alert",JOptionPane.WARNING_MESSAGE);
         }else{
-            
-            String name = jTextField1.getText().trim();
-            int senha = Integer.parseInt(jTextField2.getText());
-            int j = 0;
-            for(int i =0; i < date.conta.length; i++){
-                if(name.equals(date.conta[i])){
-                    j = i;
+            verify j = new verify();
+            int a = 0;
+            for(int i =0; i<da.size(); i++){
+                /*String [] dadoArray = new String[dadoses.size()];
+                dadoArray[i] = dadoses.get(i).getNome()+"   senha" + dadoses.get(i).getSenha();
+                System.out.println(dadoArray[i]); */
+                
+                if(jTextField1.getText().equals(da.get(i).getNome())){
+                    a = i;
                 }
             }
-            
-            switch(j) {
-                case 0:
-                   if(senha == date.getAcesso0()){
-                    JOptionPane.showMessageDialog(null, "Bem Vindo " + date.conta[j] + " !!!");
-                        }else {
-                            JOptionPane.showMessageDialog(null, "Acessor negado, Nome ou senha errado");
-                        } 
-                   break;
-                case 1:
-                   if(senha == date.getAcesso1()){
-                    JOptionPane.showMessageDialog(null, "Bem Vindo " + date.conta[j] + " !!!");
-                        }else {
-                            JOptionPane.showMessageDialog(null, "Acessor negado, Nome ou senha errado");
-                        } 
-                   break;
-                case 2:
-                if(senha == date.getAcesso2()){
-                 JOptionPane.showMessageDialog(null, "Bem Vindo " + date.conta[j] + " !!!");
-                     }else {
-                         JOptionPane.showMessageDialog(null, "Acessor negado, Nome ou senha errado");
-                     } 
-                break;
-                case 3:
-                   if(senha == date.getAcesso3()){
-                    JOptionPane.showMessageDialog(null, "Bem Vindo " + date.conta[j] + " !!!");
-                        }else {
-                            JOptionPane.showMessageDialog(null, "Acessor negado, Nome ou senha errado");
-                        } 
-                 break;
-                case 4:
-                   if(senha == date.getAcesso4()){
-                    JOptionPane.showMessageDialog(null, "Bem Vindo " + date.conta[j] + " !!!");
-                        }else {
-                            JOptionPane.showMessageDialog(null, "Acessor negado, Nome ou senha errado");
-                        } 
-                break;
+            int b = Integer.parseInt(jTextField2.getText());
+            if(jTextField1.getText().equals(da.get(a).getNome()) && b == da.get(a).getSenha()){
+                 JOptionPane.showMessageDialog(null, "Bem vindo " + da.get(a).getNome());
+            }else{
+                JOptionPane.showMessageDialog(null, "Senha ou usuario incorreta ");
             }
             
+                        
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -179,20 +179,21 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verify.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verify.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verify.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verify.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                new verify().setVisible(true);
             }
         });
     }
