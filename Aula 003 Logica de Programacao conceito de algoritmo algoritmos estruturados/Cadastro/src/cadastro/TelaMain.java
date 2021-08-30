@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package cadastro;
+import javax.swing.*;
+
 
 /**
  *
@@ -14,8 +16,12 @@ public class TelaMain extends javax.swing.JFrame {
     /**
      * Creates new form TelaMain
      */
+    
+    ImageIcon icon;
     public TelaMain() {
         initComponents();
+        icon = new ImageIcon("src/resource/icons8-folder-30.png");
+        setIconImage(icon.getImage());
     }
 
     /**
