@@ -128,6 +128,10 @@ public class IHM extends javax.swing.JFrame {
     }//GEN-LAST:event_SaveActionPerformed
 
     private void VerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerificarActionPerformed
+        A1.setText("");
+        A2.setText("");
+        I1.setText("");
+        I2.setText("");
         a.lerArraylist();
         ba=a.getDa();
         A1.setText(ba.get(0));
@@ -142,14 +146,8 @@ public class IHM extends javax.swing.JFrame {
         A2.setText("");
         I1.setText("");
         I2.setText("");
-        String B1 = A1.getText().trim();
-        String B2 = A2.getText().trim();
-        String C1 = I1.getText().trim();
-        String C2 = I2.getText().trim();
-        da.add(B1);
-        da.add(B2);
-        da.add(C1);
-        da.add(C2);
+       
+        da.clear();
         a.setDa(da);
         a.cadArraylist(); 
     }//GEN-LAST:event_MagicActionPerformed

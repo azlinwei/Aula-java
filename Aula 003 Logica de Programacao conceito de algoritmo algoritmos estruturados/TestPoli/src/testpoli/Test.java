@@ -39,6 +39,7 @@ public class Test extends javax.swing.JFrame implements Function{
         Save = new javax.swing.JButton();
         Ler = new javax.swing.JButton();
         A4 = new javax.swing.JTextField();
+        Magic = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,24 +57,31 @@ public class Test extends javax.swing.JFrame implements Function{
             }
         });
 
+        Magic.setText("Magic");
+        Magic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MagicActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(172, 172, 172)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Ler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 171, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Select)
                     .addComponent(A1)
                     .addComponent(A2)
                     .addComponent(A3)
-                    .addComponent(A4, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE))
+                    .addComponent(A4, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Save)
+                        .addGap(41, 41, 41)
+                        .addComponent(Magic)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Ler, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
@@ -89,11 +97,12 @@ public class Test extends javax.swing.JFrame implements Function{
                 .addComponent(A3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(A4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(Save)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Ler)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Save)
+                    .addComponent(Ler)
+                    .addComponent(Magic))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,6 +141,21 @@ public class Test extends javax.swing.JFrame implements Function{
             A4.setText(da.get(a).getA4());
         }
     }//GEN-LAST:event_LerActionPerformed
+
+    private void MagicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MagicActionPerformed
+        /*da.clear();
+        regDados();
+        JOptionPane.showMessageDialog(null, "Limpando dados");*/
+        int a = Integer.parseInt(Select.getText());
+        String a1 = A1.getText().trim();
+        String a2 = A2.getText().trim();
+        String a3 = A3.getText().trim();
+        String a4 = A4.getText().trim();
+        Dados dado = new Dados(a1, a2, a3, a4);
+        da.set(a, dado);
+        regDados();
+        
+    }//GEN-LAST:event_MagicActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +198,7 @@ public class Test extends javax.swing.JFrame implements Function{
     private javax.swing.JTextField A3;
     private javax.swing.JTextField A4;
     private javax.swing.JButton Ler;
+    private javax.swing.JButton Magic;
     private javax.swing.JButton Save;
     private javax.swing.JTextField Select;
     // End of variables declaration//GEN-END:variables
@@ -190,7 +215,7 @@ public class Test extends javax.swing.JFrame implements Function{
             
             JOptionPane.showMessageDialog(null, "Salvo de sucesso");
             outputFile.close();
-            this.dispose();
+            //this.dispose();
         }
         catch(IOException e){
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -199,19 +224,25 @@ public class Test extends javax.swing.JFrame implements Function{
 
     @Override
     public void verDados() {
-        try
-        {
-           FileOutputStream file = new FileOutputStream("Dados.dat");
-            ObjectOutputStream outputFile = new  ObjectOutputStream(file);
-            for(int i = 0; i < da.size(); i++){
-                outputFile.writeObject(da.get(i));            
-            }
+         try{
+            FileInputStream file = new FileInputStream("Dados.dat");
+            ObjectInputStream inputFile = new ObjectInputStream(file);
+            boolean endOfFile = false;
+            while(!endOfFile)
+            {
+                try{
+                    da.add((Dados) inputFile.readObject());
+                
+                }catch(EOFException e){
+                 endOfFile = true;
+                }catch(Exception f){
+                JOptionPane.showMessageDialog(null, f.getMessage());
+                }
             
-            JOptionPane.showMessageDialog(null, "Salvo de sucesso");
-            outputFile.close();
-            this.dispose();
-        }
-        catch(IOException e){
+                }
+            inputFile.close();
+        }catch(IOException e)
+        {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
