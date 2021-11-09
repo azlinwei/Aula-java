@@ -5,13 +5,15 @@
  */
 package cadastro;
 
+import java.sql.*;
+import java.util.*;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author azlin
  */
-public class verify extends javax.swing.JFrame {
+public class verify extends javax.swing.JFrame implements Function{
     String[] conta = {"N1", "N2", "N3"};
     int[] acesso = {1234, 5555, 987654321};
     /**
@@ -50,6 +52,7 @@ public class verify extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
+        BotSQL = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,6 +93,13 @@ public class verify extends javax.swing.JFrame {
 
         jLabel7.setText("Nome de fornecedor:");
 
+        BotSQL.setText("SQL");
+        BotSQL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotSQLActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,6 +107,8 @@ public class verify extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(226, 226, 226)
                 .addComponent(jButton1)
+                .addGap(38, 38, 38)
+                .addComponent(BotSQL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(77, 77, 77))
@@ -155,7 +167,8 @@ public class verify extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(BotSQL))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -248,6 +261,48 @@ public class verify extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void BotSQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotSQLActionPerformed
+        Connection myConn = null;
+	Statement myStmt = null;
+	ResultSet myRs = null;
+        String User = "root";
+        String pass = "";
+		
+		try {
+			// 1. Get a connection to database
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo",User,pass);
+			
+			System.out.println("Database connection successful!\n");
+			
+			// 2. Create a statement
+			myStmt = myConn.createStatement();
+			
+			// 3. Execute SQL query
+			myRs = myStmt.executeQuery("select * from employees");
+			
+			// 4. Process the result set
+			while (myRs.next()) {
+				System.out.println(myRs.getString("last_name") + ", " + myRs.getString("email"));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			/*if (myRs != null) {
+				myRs.close();
+			}
+			
+			if (myStmt != null) {
+				myStmt.close();
+			}
+			
+			if (myConn != null) {
+				myConn.close();
+			}*/
+		}
+    }//GEN-LAST:event_BotSQLActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -284,6 +339,7 @@ public class verify extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotSQL;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -305,4 +361,9 @@ public class verify extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void AcessBancDeDados() {
+        
+    }
 }
